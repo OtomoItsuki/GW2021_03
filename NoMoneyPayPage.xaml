@@ -11,21 +11,41 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.45*"/>
+            <RowDefinition Height="0.45*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="backButton" Margin="10" Content="戻る" FontSize="36" BorderThickness="2" Click="backButton_Click" FontFamily="UD Digi Kyokasho N-B"/>
         <TextBlock Text="支払額" Grid.Row="0" Grid.Column="1" FontSize="40" HorizontalAlignment="Center" FontFamily="UD Digi Kyokasho N-R" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="0" Grid.Column="2" FontSize="36" TextAlignment="Right" Margin="0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="10" InputMethod.IsInputMethodEnabled="False"/>
-        <TextBlock x:Name="PayMoney" Text="円" Grid.Column="3" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Content="支払い額計算" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="20,10" FontSize="36" FontFamily="Meiryo"/>
-
-
+        <TextBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" FontSize="36" TextAlignment="Right" Margin="0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="10" InputMethod.IsInputMethodEnabled="False"/>
+        <TextBlock x:Name="PayMoney" Text="円" Grid.Column="5" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Content="支払い額計算" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Margin="20,10" FontSize="36" FontFamily="Meiryo"/>
+        <Label Content="お札の枚数" Grid.Row="2" Grid.ColumnSpan="2" FontSize="38" FontFamily="Meiryo" VerticalAlignment="Center"/>
+        <Label Content="10,000円" Grid.Row="3" Grid.Column="1" FontSize="28" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+        <Label Content="枚" Grid.Row="3" Grid.Column="2" FontSize="28" HorizontalAlignment="Right"/>
+        <Label Content="5,000円" Grid.Row="4" Grid.Column="1" FontSize="28" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+        <Label Content="枚" Grid.Row="4" Grid.Column="2" FontSize="28" HorizontalAlignment="Right"/>
+        <Label Content="1,000円" Grid.Row="5" Grid.Column="1" FontSize="28" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+        <Label Content="枚" Grid.Row="5" Grid.Column="2" FontSize="28" HorizontalAlignment="Right"/>
+        <Label Content="500円" Grid.Row="3" Grid.Column="3" FontSize="28" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+        <Label Content="枚" Grid.Row="3" Grid.Column="4" FontSize="28" HorizontalAlignment="Right"/>
+        <Label Content="100円" Grid.Row="4" Grid.Column="3" FontSize="28" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+        <Label Content="枚" Grid.Row="4" Grid.Column="4" FontSize="28" HorizontalAlignment="Right"/>
+        <Label Content="50円" Grid.Row="5" Grid.Column="3" FontSize="28" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+        <Label Content="枚" Grid.Row="5" Grid.Column="4" FontSize="28" HorizontalAlignment="Right"/>
+        <Label Content="10円" Grid.Row="6" Grid.Column="3" FontSize="28" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+        <Label Content="枚" Grid.Row="6" Grid.Column="4" FontSize="28" HorizontalAlignment="Right"/>
     </Grid>
 </Page>
