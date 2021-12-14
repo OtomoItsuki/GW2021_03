@@ -1,0 +1,27 @@
+﻿<Page x:Class="PayControl.StartWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PayControl"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StartWindow">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="支払い調整システム" Grid.Row="0" FontSize="50" HorizontalAlignment="Center" FontFamily="UD Digi Kyokasho N-R" VerticalAlignment="Top" Margin="0,20,0,0" Grid.ColumnSpan="2"/>
+
+        <Button Content="支払い額計算" Grid.Row="1" Grid.Column="0" Margin="40,0" FontSize="36" FontFamily="Meiryo" Click="Button_Click"/>
+        <Button Content="現金から&#xa;支払い額計算" Grid.Row="1" Grid.Column="1" Margin="40,0" FontSize="36" FontFamily="Meiryo"/>
+
+    </Grid>
+</Page>
