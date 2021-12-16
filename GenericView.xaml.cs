@@ -15,17 +15,11 @@ using System.Windows.Shapes;
 
 namespace PayControl {
     /// <summary>
-    /// NoMoneyPayWindow.xaml の相互作用ロジック
+    /// GenericView.xaml の相互作用ロジック
     /// </summary>
-    public partial class NoMoneyPayPage{
-        public NoMoneyPayPage() {
+    public partial class GenericView : Page {
+        public GenericView() {
             InitializeComponent();
-
-        }
-
-        private void backButton_Click(object sender, RoutedEventArgs e) {
-
-            NavigationService.GoBack();
         }
     }
 }

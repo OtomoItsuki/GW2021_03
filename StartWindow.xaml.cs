@@ -23,8 +23,8 @@ namespace PayControl {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            var NoMoneyPayPage = new NoMoneyPayPage();
-            NavigationService.Navigate(NoMoneyPayPage);
+            var genericView = new GenericView();
+            NavigationService.Navigate(genericView);
         }
     }
 }
