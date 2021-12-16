@@ -46,6 +46,8 @@ namespace PayControl {
     public class BasePayPage : Page {
         static BasePayPage() {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BasePayPage), new FrameworkPropertyMetadata(typeof(BasePayPage)));
+            
+            
         }
 
         public override void OnApplyTemplate() {
@@ -53,6 +55,7 @@ namespace PayControl {
 
             Button BackButton = GetTemplateChild("backButton") as Button;
             BackButton.Click += BackButton_Click;
+
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e) {
