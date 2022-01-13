@@ -22,12 +22,13 @@ namespace PayControl {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            var genericView = new GenericView();
-            NavigationService.Navigate(genericView);
 
-            //var noMoneyPayPage = new NoMoneyPayPage();
-            //NavigationService.Navigate(noMoneyPayPage);
+        private void NMPButton_Click(object sender, RoutedEventArgs e) {
+        }
+        private void HMPButton_Click(object sender, RoutedEventArgs e) {
+
+            var haveMoneyPayPage = new HaveMoneyPayPage();
+            NavigationService.Navigate(haveMoneyPayPage);
         }
     }
 }

@@ -5,61 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PayControl {
-    /// <summary>
-    /// このカスタム コントロールを XAML ファイルで使用するには、手順 1a または 1b の後、手順 2 に従います。
-    ///
-    /// 手順 1a) 現在のプロジェクトに存在する XAML ファイルでこのカスタム コントロールを使用する場合
-    /// この XmlNamespace 属性を使用場所であるマークアップ ファイルのルート要素に
-    /// 追加します:
-    ///
-    ///     xmlns:MyNamespace="clr-namespace:PayControl"
-    ///
-    ///
-    /// 手順 1b) 異なるプロジェクトに存在する XAML ファイルでこのカスタム コントロールを使用する場合
-    /// この XmlNamespace 属性を使用場所であるマークアップ ファイルのルート要素に
-    /// 追加します:
-    ///
-    ///     xmlns:MyNamespace="clr-namespace:PayControl;assembly=PayControl"
-    ///
-    /// また、XAML ファイルのあるプロジェクトからこのプロジェクトへのプロジェクト参照を追加し、
-    /// リビルドして、コンパイル エラーを防ぐ必要があります:
-    ///
-    ///     ソリューション エクスプローラーで対象のプロジェクトを右クリックし、
-    ///     [参照の追加] の [プロジェクト] を選択してから、このプロジェクトを参照し、選択します。
-    ///
-    ///
-    /// 手順 2)
-    /// コントロールを XAML ファイルで使用します。
-    ///
-    ///     <MyNamespace:BasePayPage/>
-    ///
-    /// </summary>
-    public class BasePayPage : Page {
-        static BasePayPage() {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(BasePayPage), new FrameworkPropertyMetadata(typeof(BasePayPage)));
-            
+    public class BasePayPage : Page{
+        readonly int[] MONEYTYPE = new int[] { 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 };
+        public BasePayPage() {
             
         }
 
-        public override void OnApplyTemplate() {
-            base.OnApplyTemplate();
-
-            Button BackButton = GetTemplateChild("backButton") as Button;
-            BackButton.Click += BackButton_Click;
-
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e) {
+        protected void BackButton_Click(object sender, RoutedEventArgs e) {
             NavigationService.GoBack();
+        }
+        protected void PayCalc_Click(object sender, RoutedEventArgs e) {
+
+        }
+        protected int[] payCaliculate(int payMoney, int checkedNum) {
+            int[] resultPay = new int[2];
+            //支払いに出す総額
+            resultPay[0] = payMoney;
+            //総額から支払額を引いた数(お釣り)今は確定で0
+            resultPay[1] = payMoney-payMoney;
+            return resultPay;
         }
     }
 }

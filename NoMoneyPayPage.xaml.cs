@@ -17,15 +17,11 @@ namespace PayControl {
     /// <summary>
     /// NoMoneyPayWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class NoMoneyPayPage{
+    public partial class NoMoneyPayPage :BasePayPage{
         public NoMoneyPayPage() {
             InitializeComponent();
 
         }
 
-        private void backButton_Click(object sender, RoutedEventArgs e) {
-
-            NavigationService.GoBack();
-        }
     }
 }

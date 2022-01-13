@@ -5,9 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PayControl"
       mc:Ignorable="d" 
-      d:DesignHeight="405" d:DesignWidth="800"
+      d:DesignHeight="540" d:DesignWidth="960"
       Title="GenericView">
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30*"/>
@@ -32,8 +31,8 @@
         <TextBox x:Name="payMoney" Grid.Row="1" Grid.Column="2" FontSize="36" TextAlignment="Right" Margin="0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" MaxLength="10" InputMethod.IsInputMethodEnabled="False"/>
         <Label Content="円"  Grid.Row="1" Grid.Column="3" FontSize="40" FontFamily="UD Digi Kyokasho N-R"/>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
-            <RadioButton Content="お釣りの種類が少なくなるように計算" FontSize="20" Foreground="#FF096300" VerticalContentAlignment="Center" IsChecked="True"/>
-            <RadioButton Content="お釣りが量が少なくなるように計算" FontSize="20" Foreground="#FF859B00" VerticalContentAlignment="Center"/>
+            <RadioButton Content="お釣りの種類が少なくなる" FontSize="20" Foreground="#FF096300" VerticalContentAlignment="Center" IsChecked="True"/>
+            <RadioButton Content="お釣りが量が少なくなる" FontSize="20" Foreground="#FF859B00" VerticalContentAlignment="Center"/>
         </StackPanel>
         <Label Content="お札の枚数" Grid.Row="3" Grid.ColumnSpan="5" FontSize="30" FontFamily="Meiryo" BorderThickness="0,0,0,3" BorderBrush="Green" IsHitTestVisible="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" />
         <Button Content="所持金を入力" Grid.Row="3" Grid.Column="1" Margin="10" FontSize="30" FontFamily="UD Digi Kyokasho N-R" Visibility="Visible" HorizontalAlignment="Right"/>

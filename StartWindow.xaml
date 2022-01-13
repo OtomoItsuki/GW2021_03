@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PayControl"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="540" d:DesignWidth="960"
       Title="StartWindow">
 
     <Grid>
@@ -20,8 +20,8 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="支払い調整システム" Grid.Row="0" FontSize="50" HorizontalAlignment="Center" FontFamily="UD Digi Kyokasho N-R" VerticalAlignment="Top" Margin="0,20,0,0" Grid.ColumnSpan="2"/>
 
-        <Button Content="支払い額計算" Grid.Row="1" Grid.Column="0" Margin="40,0" FontSize="36" FontFamily="Meiryo" Click="Button_Click"/>
-        <Button Content="現金から&#xa;支払い額計算" Grid.Row="1" Grid.Column="1" Margin="40,0" FontSize="36" FontFamily="Meiryo"/>
+        <Button x:Name="NMPButton" Content="支払い額計算" Grid.Row="1" Grid.Column="0" Margin="40,0" FontSize="36" FontFamily="Meiryo" Click="NMPButton_Click"/>
+        <Button x:Name="HMPButton" Content="現金から&#xa;支払い額計算" Grid.Row="1" Grid.Column="1" Margin="40,0" FontSize="36" FontFamily="Meiryo" Click="HMPButton_Click"/>
 
     </Grid>
 </Page>

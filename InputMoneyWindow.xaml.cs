@@ -10,17 +10,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PayControl {
     /// <summary>
-    /// GenericView.xaml の相互作用ロジック
+    /// InputMoneyWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class GenericView : Page {
-        public GenericView() {
+    public partial class InputMoneyWindow : Window {
+        public InputMoneyWindow() {
             InitializeComponent();
         }
-
     }
 }

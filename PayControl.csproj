@@ -62,6 +62,9 @@
     <Compile Include="HaveMoneyPayPage.xaml.cs">
       <DependentUpon>HaveMoneyPayPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InputMoneyWindow.xaml.cs">
+      <DependentUpon>InputMoneyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NoMoneyPayPage.xaml.cs">
       <DependentUpon>NoMoneyPayPage.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HaveMoneyPayPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputMoneyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,10 +102,6 @@
     <Page Include="StartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
