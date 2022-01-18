@@ -24,7 +24,7 @@
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="backButton" Margin="10" Content="戻る" FontSize="24" BorderThickness="2" FontFamily="UD Digi Kyokasho N-R"/>
+        <Button x:Name="backButton" Margin="10" Content="戻る" FontSize="24" BorderThickness="2" FontFamily="UD Digi Kyokasho N-R" Click="backButton_Click"/>
         <Label Content="所持金" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="38" FontFamily="UD Digi Kyokasho N-R" Foreground="#FFE6A700"/>
         <Label Name="lbhaveMoney" Content="10000" Grid.Column="3" FontSize="38" HorizontalAlignment="Right"/>
         <Label Content="円" Grid.Column="4" FontSize="38" FontFamily="UD Digi Kyokasho N-R" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>

@@ -19,13 +19,19 @@ namespace PayControl {
         protected void PayCalc_Click(object sender, RoutedEventArgs e) {
 
         }
-        protected int[] payCaliculate(int payMoney, int checkedNum) {
+        
+        protected int[] PayCaliculate(int payMoney, int checkedNum) {
             int[] resultPay = new int[2];
             //支払いに出す総額
             resultPay[0] = payMoney;
             //総額から支払額を引いた数(お釣り)今は確定で0
             resultPay[1] = payMoney-payMoney;
             return resultPay;
+        }
+        protected void SetLb(int[] hLabels ,Label[] labels) {
+            for (int i = 0; i < labels.Length; i++) {
+
+            }
         }
     }
 }

@@ -32,10 +32,11 @@ namespace PayControl {
         private void payCalc_Click(object sender, RoutedEventArgs e) {
             var s = spRadiobutton.Children[0];
             int checkedNum = CheackRB(spRadiobutton.Children);
-            int[] payResult = payCaliculate(int.Parse(tbPayMoney.Text), checkedNum);
+            int[] payResult = PayCaliculate(int.Parse(tbPayMoney.Text), checkedNum);
             rPayMoney.Content = payResult[0];
             rChange.Content = payResult[1];
             rHaveMoney.Content = (int.Parse(lbhaveMoney.Content.ToString()) + payResult[1]) -payResult[0];
+            
         }
 
 
@@ -55,6 +56,10 @@ namespace PayControl {
             if (!int.TryParse(box.Text, out d)) {
                 box.Text = Regex.Replace(box.Text, "[^0-9-]", "");
             }
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e) {
+            base.BackButton_Click(sender, e);
         }
     }
 }
