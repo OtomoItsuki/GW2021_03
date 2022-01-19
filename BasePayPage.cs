@@ -28,10 +28,22 @@ namespace PayControl {
             resultPay[1] = payMoney-payMoney;
             return resultPay;
         }
-        protected void SetLb(int[] hLabels ,Label[] labels) {
-            for (int i = 0; i < labels.Length; i++) {
-
+        protected void SetLb(int[] hLabels ,List<Label> labels) {
+            if (hLabels.Length != labels.Count) {
+                return;
             }
+            for (int i = 0; i < labels.Count; i++) {
+                labels[i].Content = hLabels[i];
+            }
+        }
+        protected void ButtonVisibleOn(Button button) {
+            button.Visibility = Visibility.Visible;
+        }
+        protected void ButtonVisibleOff(Button button) {
+            button.Visibility = Visibility.Hidden;
+        }
+        protected void nextAccounting_Click(object sender, RoutedEventArgs e, Button button) {
+            ButtonVisibleOff(button);
         }
     }
 }

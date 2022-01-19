@@ -154,7 +154,7 @@
             <Label Content="クリア" FontSize="20" FontFamily="Bodoni MT Black" BorderThickness="1" BorderBrush="Black"/>
             </Button>
         </StackPanel>
-        <Button x:Name="nextAccounting" Content="次の会計に進む" Grid.Row="5" Grid.Column="3" Margin="10" FontSize="22" FontFamily="Bodoni MT Black" BorderThickness="2"/>
+        <Button x:Name="nextAccounting" Content="次の会計に進む" Grid.Row="5" Grid.Column="3" Margin="10" FontSize="22" FontFamily="Bodoni MT Black" BorderThickness="2" Click="nextAccounting_Click"/>
     </Grid>
 
 

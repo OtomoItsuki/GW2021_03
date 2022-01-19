@@ -20,23 +20,32 @@ namespace PayControl {
     /// </summary>
     public partial class HaveMoneyPayPage : BasePayPage {
         public List<Label> hLabels = null;
+        public List<Label> pLabels = null;
         public List<Label> rLabels = null;
         public int[] money = {1,2,3,4,5,1,2,3,4 };
+        
+
 
         public HaveMoneyPayPage() {
             InitializeComponent();
+            nextAccounting.Visibility = Visibility.Hidden;
             hLabels = new List<Label>() { lbH10000, lbH5000, lbH1000, lbH500, lbH100, lbH50, lbH10, lbH5, lbH1 };
-            hLabels = new List<Label>() { lbP10000, lbP5000, lbP1000, lbP500, lbP100, lbP50, lbP10, lbP5, lbP1 };
+            pLabels = new List<Label>() { lbP10000, lbP5000, lbP1000, lbP500, lbP100, lbP50, lbP10, lbP5, lbP1 };
+            rLabels = new List<Label>() { rPayMoney, rHaveMoney, rChange };
         }
 
         private void payCalc_Click(object sender, RoutedEventArgs e) {
-            var s = spRadiobutton.Children[0];
+            if (tbPayMoney.Text =="") {
+                return;
+            }   
             int checkedNum = CheackRB(spRadiobutton.Children);
-            int[] payResult = PayCaliculate(int.Parse(tbPayMoney.Text), checkedNum);
-            rPayMoney.Content = payResult[0];
-            rChange.Content = payResult[1];
-            rHaveMoney.Content = (int.Parse(lbhaveMoney.Content.ToString()) + payResult[1]) -payResult[0];
-            
+
+            if (int.Parse(lbhaveMoney.Content.ToString()) < int.Parse(tbPayMoney.Text)) {
+                MessageBox.Show("支払う額より所持金が少ないです","",MessageBoxButton.OK);
+                return;
+            }
+
+            base.ButtonVisibleOn(nextAccounting);
         }
 
 
@@ -60,6 +69,11 @@ namespace PayControl {
 
         private void backButton_Click(object sender, RoutedEventArgs e) {
             base.BackButton_Click(sender, e);
+            
+        }
+
+        private void nextAccounting_Click(object sender, RoutedEventArgs e) {
+            base.nextAccounting_Click(sender, e,nextAccounting);
         }
     }
 }
