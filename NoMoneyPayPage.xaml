@@ -8,92 +8,127 @@
     d:DesignHeight="540" d:DesignWidth="960"
       Title="NoMoneyPayPage">
     <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="90*"/>
-                <RowDefinition Height="30*"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="backButton" Margin="10" Content="戻る" FontSize="24" BorderThickness="2" FontFamily="UD Digi Kyokasho N-R" Click="backButton_Click"/>
+        <Label Content="支払い額" Grid.Row="1" Grid.Column="2" FontSize="38" HorizontalAlignment="Right" FontFamily="UD Digi Kyokasho N-R" VerticalAlignment="Center"/>
+        <TextBox x:Name="tbPayMoney" Grid.Row="1" Grid.Column="3" FontSize="38" TextAlignment="Right" Margin="0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" MaxLength="10" InputMethod.IsInputMethodEnabled="False" TextChanged="tbPayMoney_TextChanged"/>
+        <Label Content="円"  Grid.Row="1" Grid.Column="4" FontSize="40" FontFamily="UD Digi Kyokasho N-R" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <StackPanel x:Name ="spRadiobutton" Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+            <RadioButton Content="お釣りの種類が少なくなる" FontSize="20" Foreground="#FF096300" VerticalContentAlignment="Center" IsChecked="True"/>
+            <RadioButton Content="お釣りの量が少なくなる" FontSize="20" Foreground="#FF859B00" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <Label Content="現金の種類と枚数" Grid.Row="3" Grid.ColumnSpan="5" FontSize="30" FontFamily="Meiryo" BorderThickness="0,0,0,3" BorderBrush="Green" IsHitTestVisible="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" />
+        <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btSelfInput" Content="支払い枚数を入力" FontSize="24" Margin="10" FontFamily="UD Digi Kyokasho N-R" Click="btSelfInput_Click"/>
+            <Button x:Name="payCalc" Content="支払い額計算" FontSize="30" Margin="10" FontFamily="UD Digi Kyokasho N-R" Click="payCalc_Click"/>
+
+        </StackPanel>
+
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="80*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <Button x:Name="backButton" Margin="10" Content="戻る" FontSize="24" BorderThickness="2" FontFamily="UD Digi Kyokasho N-R"/>
-            <Label Content="所持金" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="38" FontFamily="UD Digi Kyokasho N-R" Foreground="#FFE6A700"/>
-            <Label Name="haveMoney" Grid.Column="2" FontSize="38" HorizontalAlignment="Right"/>
-            <Label Content="円" Grid.Column="3" FontSize="38" FontFamily="UD Digi Kyokasho N-R" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <Label Content="支払い額" Grid.Row="1" Grid.Column="1" FontSize="38" HorizontalAlignment="Right" FontFamily="UD Digi Kyokasho N-R" VerticalAlignment="Center"/>
-            <TextBox x:Name="payMoney" Grid.Row="1" Grid.Column="2" FontSize="36" TextAlignment="Right" Margin="0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" MaxLength="10" InputMethod.IsInputMethodEnabled="False"/>
-            <Label Content="円"  Grid.Row="1" Grid.Column="3" FontSize="40" FontFamily="UD Digi Kyokasho N-R" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
-                <RadioButton Content="お釣りの種類が少なくなる" FontSize="20" Foreground="#FF096300" VerticalContentAlignment="Center" IsChecked="True"/>
-                <RadioButton Content="お釣りが量が少なくなる" FontSize="20" Foreground="#FF859B00" VerticalContentAlignment="Center"/>
+            <Label Content="10,000円" Grid.Row="0" Grid.Column="0" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP10000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
-            <Label Content="お札の枚数" Grid.Row="3" Grid.ColumnSpan="5" FontSize="30" FontFamily="Meiryo" BorderThickness="0,0,0,3" BorderBrush="Green" IsHitTestVisible="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" />
-            <Button Content="所持金を入力" Grid.Row="3" Grid.Column="1" Margin="10" FontSize="30" FontFamily="UD Digi Kyokasho N-R" Visibility="Visible" HorizontalAlignment="Right"/>
-            <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal">
-                <Button Content="手動で入力" FontSize="24" Margin="10" FontFamily="UD Digi Kyokasho N-R"/>
-                <Button Content="支払い額計算" FontSize="30" Margin="10" FontFamily="UD Digi Kyokasho N-R"/>
-
+            <Label Content="枚" Grid.Row="0" Grid.Column="2" FontSize="24" HorizontalAlignment="Center"/>
+            <Label Content="5,000円" Grid.Row="1" Grid.Column="0" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP5000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
+            <Label Content="枚" Grid.Row="1" Grid.Column="2" FontSize="24" HorizontalAlignment="Center"/>
+            <Label Content="1,000円" Grid.Row="2" Grid.Column="0" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP1000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
+            </StackPanel>
+            <Label Content="枚" Grid.Row="2" Grid.Column="2" FontSize="24" HorizontalAlignment="Center"/>
+            <Label Content="500円" Grid.Row="0" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="0"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP500" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
+            </StackPanel>
+            <Label Content="枚" Grid.Row="0" Grid.Column="5" FontSize="24" HorizontalAlignment="Center"/>
+            <Label Content="100円" Grid.Row="1" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="1"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP100" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
+            </StackPanel>
+            <Label Content="枚" Grid.Row="1" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
+            <Label Content="50円" Grid.Row="2" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="2"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP50" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
+            </StackPanel>
+            <Label Content="枚" Grid.Row="2" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
+            <Label Content="10円" Grid.Row="3" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="3"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP10" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
+            </StackPanel>
+            <Label Content="枚" Grid.Row="3" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
+            <Label Content="5円" Grid.Row="4" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="4"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP5" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
+            </StackPanel>
+            <Label Content="枚" Grid.Row="4" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
+            <Label Content="1円" Grid.Row="5" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="5"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="lbP1" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
+            </StackPanel>
+            <Label Content="枚" Grid.Row="5" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
 
-            <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6" Grid.RowSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="6*"/>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="6*"/>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="10*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Label Content="10,000円" Grid.Row="0" Grid.Column="0" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="0" Grid.Column="1" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Content="5,000円" Grid.Row="1" Grid.Column="0" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="1" Grid.Column="1" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Content="1,000円" Grid.Row="2" Grid.Column="0" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="2" Grid.Column="1" FontSize="22" HorizontalAlignment="Right"/>
-                <Button Grid.Column="0" Grid.Row="4" Content="結果をクリア" Visibility="Hidden"/>
-                <Label Content="500円" Grid.Row="0" Grid.Column="2" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="0" Grid.Column="3" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Content="100円" Grid.Row="1" Grid.Column="2" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="1" Grid.Column="3" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Content="50円" Grid.Row="2" Grid.Column="2" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="2" Grid.Column="3" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Content="10円" Grid.Row="3" Grid.Column="2" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="3" Grid.Column="3" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Content="5円" Grid.Row="4" Grid.Column="2" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="4" Grid.Column="3" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Content="1円" Grid.Row="5" Grid.Column="2" FontSize="22" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
-                <Label Content="枚" Grid.Row="5" Grid.Column="3" FontSize="22" HorizontalAlignment="Right"/>
-
-                <Label Grid.Row="0" Grid.Column="4" Content="総額" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Grid.Row="0" Grid.Column="5" Content="円" FontSize="22" HorizontalAlignment="Right"  Foreground="YellowGreen"/>
-                <Label Grid.Row="1" Grid.Column="4" Content="お釣り" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Grid.Row="1" Grid.Column="5" Content="円" FontSize="22" HorizontalAlignment="Right" Foreground="OrangeRed"/>
-                <Label Grid.Row="3" Grid.Column="4" Content="所持金" FontSize="22" HorizontalAlignment="Right"/>
-                <Label Grid.Row="3" Grid.Column="5" Content="円" FontSize="22" HorizontalAlignment="Right" Foreground="Blue"/>
-            </Grid>
-            <Button Grid.Row="5" BorderThickness="0">
+            <Label Grid.Row="0" Grid.Column="6" Content="総額" FontSize="24" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Row="0" Grid.Column="7" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="rPayMoney" Content="0" FontSize="24" Foreground="YellowGreen"/>
+                <Label Content="円" FontSize="24" Foreground="YellowGreen"/>
+            </StackPanel>
+            <Label Grid.Row="1" Grid.Column="6" Content="お釣り" FontSize="24" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Row="1" Grid.Column="7" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Name="rChange" Content="0" FontSize="24" Foreground="OrangeRed"/>
+                <Label Content="円" FontSize="24" Foreground="OrangeRed"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="5,0,0,0">
+            <Button Grid.Row="5" BorderThickness="0" Padding="10">
+                <Label Content="読み込み" FontSize="20" FontFamily="Bodoni MT Black" BorderThickness="1" BorderBrush="Black"/>
+            </Button>
+            <Button BorderThickness="0" Margin="10,0,0,0" Padding="10">
                 <Label Content="保存" FontSize="20" FontFamily="Bodoni MT Black" BorderThickness="1" BorderBrush="Black"/>
             </Button>
-            <Button Grid.Row="5" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Left" Margin="10,0,0,0" Padding="10">
+            <Button Grid.Row="5" Grid.Column="1" BorderThickness="0" Margin="10,0,0,0" Padding="10">
                 <Label Content="クリア" FontSize="20" FontFamily="Bodoni MT Black" BorderThickness="1" BorderBrush="Black"/>
             </Button>
-        </Grid>
+        </StackPanel>
+        <Button x:Name="nextAccounting" Content="次の会計に進む" Grid.Row="5" Grid.Column="3" Margin="10" FontSize="22" FontFamily="Bodoni MT Black" BorderThickness="2" Click="nextAccounting_Click"/>
+    </Grid>
 
 
 </local:BasePayPage>

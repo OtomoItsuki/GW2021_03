@@ -24,11 +24,12 @@ namespace PayControl {
 
 
         private void NMPButton_Click(object sender, RoutedEventArgs e) {
+            NavigationService.Navigate(MainWindow.noMoneyPayPage);
         }
         private void HMPButton_Click(object sender, RoutedEventArgs e) {
-
-            var haveMoneyPayPage = new HaveMoneyPayPage();
-            NavigationService.Navigate(haveMoneyPayPage);
+            NavigationService.Navigate(MainWindow.haveMoneyPayPage);
+            
         }
+        
     }
 }

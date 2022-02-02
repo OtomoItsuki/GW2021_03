@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BasePayPage.cs" />
+    <Compile Include="Calculator.cs" />
     <Compile Include="GenericView.xaml.cs">
       <DependentUpon>GenericView.xaml</DependentUpon>
     </Compile>

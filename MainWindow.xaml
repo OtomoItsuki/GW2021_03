@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PayControl"
         mc:Ignorable="d"
-        Title="MainWindow" Height="540" Width="960" MinWidth="960" MinHeight="540" MaxWidth="960" MaxHeight="540">
+        Title="MainWindow" Height="540" Width="960" MinWidth="960" MinHeight="540" MaxWidth="960" MaxHeight="540"
+        Closing="Window_Closing">
     <Grid>
         <Frame Name="frame" NavigationUIVisibility="Hidden" Background="AliceBlue"/>
     </Grid>

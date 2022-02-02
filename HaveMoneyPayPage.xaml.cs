@@ -20,10 +20,9 @@ namespace PayControl {
     /// </summary>
     public partial class HaveMoneyPayPage : BasePayPage {
         public List<Label> hLabels = null;
-        public List<Label> pLabels = null;
-        public List<Label> rLabels = null;
         public int[] money = {1,2,3,4,5,1,2,3,4 };
-        
+
+
 
 
         public HaveMoneyPayPage() {
@@ -44,22 +43,13 @@ namespace PayControl {
                 MessageBox.Show("支払う額より所持金が少ないです","",MessageBoxButton.OK);
                 return;
             }
-
+            base.PayCalc_Click(sender, e, pLabels, rLabels);
             base.ButtonVisibleOn(nextAccounting);
         }
 
 
-        private int CheackRB(UIElementCollection children) {
-            int count = 0;
-            foreach (RadioButton rb in children) {
-                if ((bool)rb.IsChecked) {
-                    return count;
-                }
-                count++;
-            }
-            return children.Count;
-        }
-        private void tbPayMoneyChenged(object sender, TextChangedEventArgs e) {
+        
+        private void TbPayMoneyChenged(object sender, TextChangedEventArgs e) {
             TextBox box = (TextBox)sender;
             int d;
             if (!int.TryParse(box.Text, out d)) {
@@ -73,7 +63,15 @@ namespace PayControl {
         }
 
         private void nextAccounting_Click(object sender, RoutedEventArgs e) {
-            base.nextAccounting_Click(sender, e,nextAccounting);
+            base.NextAccounting_Click(sender, e,nextAccounting);
+        }
+        
+        private void BtHMInput_Click(object sender, RoutedEventArgs e) {
+            base.BtInput_Click(sender, e,hLabels);
+        }
+
+        private void BtSelfInput_Click(object sender, RoutedEventArgs e) {
+            base.SelfInputShow(sender, e);
         }
     }
 }

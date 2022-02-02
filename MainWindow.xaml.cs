@@ -18,11 +18,20 @@ namespace PayControl {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
+        public static NoMoneyPayPage noMoneyPayPage = new NoMoneyPayPage();
+        public static HaveMoneyPayPage haveMoneyPayPage = new HaveMoneyPayPage();
+
         public MainWindow() {
             InitializeComponent();
-
             Uri uri = new Uri("/StartWindow.xaml", UriKind.Relative);
             frame.Source = uri;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            if (BasePayPage.inputMoneyWindow != null) {
+                BasePayPage.inputMoneyWindow.Close();
+                
+            }
         }
     }
 }
