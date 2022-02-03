@@ -33,7 +33,8 @@ namespace PayControl {
                 return;
             }
             int checkedNum = CheackRB(spRadiobutton.Children);
-
+            int[] pMResult = Calculator.PayMoneyCalc(int.Parse(tbPayMoney.Text));
+            base.PayCalc_Click(sender,e, pLabels, pMResult);
            
             base.ButtonVisibleOn(nextAccounting);
         }

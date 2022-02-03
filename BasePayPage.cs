@@ -20,16 +20,14 @@ namespace PayControl {
         protected void BackButton_Click(object sender, RoutedEventArgs e) {
             NavigationService.GoBack();
         }
-        protected void PayCalc_Click(object sender, RoutedEventArgs e, List<Label> pLabels, List<Label> rLabels) {
-            Calculator.PayMoneyCalc()
-        }
         
-        protected void SetLb(int[] hLabels ,List<Label> labels) {
-            if (hLabels.Length != labels.Count) {
+        
+        protected void SetLb(List<Label> labels,int[] pastNums) {
+            if (pastNums.Length != labels.Count) {
                 return;
             }
             for (int i = 0; i < labels.Count; i++) {
-                labels[i].Content = hLabels[i];
+                labels[i].Content = pastNums[i];
             }
         }
         protected void ButtonVisibleOn(Button button) {
@@ -55,6 +53,11 @@ namespace PayControl {
                 count++;
             }
             return children.Count;
+        }
+
+        internal void PayCalc_Click(object sender, RoutedEventArgs e, List<Label> pLabels, int[] pMResult) {
+
+            SetLb(pLabels, pMResult);
         }
 
         internal void SelfInputShow(object sender, RoutedEventArgs e) {

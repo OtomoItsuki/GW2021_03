@@ -20,7 +20,7 @@ namespace PayControl {
     /// </summary>
     public partial class HaveMoneyPayPage : BasePayPage {
         public List<Label> hLabels = null;
-        public int[] money = {1,2,3,4,5,1,2,3,4 };
+        public int[] money = {1,0,0,0,0,0,0,0,0 };
 
 
 
@@ -30,7 +30,7 @@ namespace PayControl {
             nextAccounting.Visibility = Visibility.Hidden;
             hLabels = new List<Label>() { lbH10000, lbH5000, lbH1000, lbH500, lbH100, lbH50, lbH10, lbH5, lbH1 };
             pLabels = new List<Label>() { lbP10000, lbP5000, lbP1000, lbP500, lbP100, lbP50, lbP10, lbP5, lbP1 };
-            rLabels = new List<Label>() { rPayMoney, rHaveMoney, rChange };
+            rLabels = new List<Label>() { rPayMoney, rChange };
         }
 
         private void payCalc_Click(object sender, RoutedEventArgs e) {
@@ -38,12 +38,18 @@ namespace PayControl {
                 return;
             }   
             int checkedNum = CheackRB(spRadiobutton.Children);
+            int pMcalc = int.Parse(tbPayMoney.Text);
+            int[] hMCalc = money;
+            //int haveMoneyCalc = ;
 
-            if (int.Parse(lbhaveMoney.Content.ToString()) < int.Parse(tbPayMoney.Text)) {
+            if (pMcalc > int.Parse(lbhaveMoney.Content.ToString())) {
                 MessageBox.Show("支払う額より所持金が少ないです","",MessageBoxButton.OK);
                 return;
             }
-            base.PayCalc_Click(sender, e, pLabels, rLabels);
+            base.SetLb(hLabels, hMCalc);
+            int[] pMResult = Calculator.PayMoneyCalc(pMcalc, hMCalc);
+            base.PayCalc_Click(sender, e, pLabels, pMResult);
+            rRemainMoney.Content = Calculator.ArrayToNum(hMCalc);
             base.ButtonVisibleOn(nextAccounting);
         }
 
