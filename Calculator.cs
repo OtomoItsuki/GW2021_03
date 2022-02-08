@@ -17,12 +17,36 @@ namespace PayControl {
         /// <summary>
         /// 使用するお金の種類を集めた配列
         /// </summary>
-        private static readonly int[] MONEYTYPE = new int[] { 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 };
+        public static readonly int[] MONEYTYPE = new int[] { 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 };
         /// <summary>
         /// 使用するお金の限度数を種類ごとにした配列
-        /// お金の種類が増えたときに変更が必要のないように数値は入れない
         /// </summary>
-        private static int[] MoneyLimits;
+        public readonly static int[] MoneyLimits = setLimits();
+        public readonly static int[] PAYMONEYLIMITS = new int[] {127,127,127,20,20,20,20,20,20, };
+
+        private static int[] setLimits() {
+            int[] Limits = new int[MONEYTYPE.Length];
+            for (int i = 0; i < MONEYTYPE.Length; i++) {
+                //10000はほぼ制限なし(127まで)
+                if (i == 0) {
+                    MoneyLimits[i] = 127;
+                }
+                //1000,100,10,1は2枚
+                else if (i % 2 != 0) {
+                    MoneyLimits[i] = 2;
+                }
+                //500,50,5は1枚
+                else if (i < COININDEX) {
+                    MoneyLimits[i] = 1;
+                }
+                //5000は1枚
+                else {
+                    MoneyLimits[i] = 1;
+                }
+            }
+            return Limits;
+        }
+
         /// <summary>
         /// 配列を返すための支払うときの種類ごとに数値を格納する配列
         /// </summary>
@@ -58,27 +82,6 @@ namespace PayControl {
             return resultPayMoney;
         }
         private static int[] NumToArrayReduceRemain(int reduceNum) {
-            if (MoneyLimits == null) {
-                MoneyLimits = new int[MONEYTYPE.Length];
-                for (int i = 0; i < MoneyLimits.Length; i++) {
-                    //10000は無限(127まで)
-                    if (i == 0) {
-                        MONEYTYPE[i] = 127;
-                    }
-                    //1000,100,10,1は2枚
-                    else if (i%2!=0) {
-                        MONEYTYPE[i] = 2;
-                    }
-                    //500,50,5は1枚
-                    else if (i < COININDEX) {
-                        MoneyLimits[i] = 1;
-                    }
-                    //5000は2枚
-                    else {
-                        MoneyLimits[i] = 2;
-                    }
-                }
-            }
             return NumToArrayReduceRemain(reduceNum,MoneyLimits);
         }
         //紙幣から一種類、硬貨から一種類以下で少なくするもしくは硬貨から二種類以下
@@ -148,6 +151,10 @@ namespace PayControl {
 
             }
             return resultPayMoney;
+        }
+        //支払い枚数を自分で入力して計算する(帰ってくるのはお釣り)
+        public static int[] InputMoneyToReduce(int payMoney,int[] payMoneys) {
+            return payMoneys;
         }
 
         private static void VerifyMostNum(int[] mNums, ref int[] rNums, ref int rCount, int valueRCount) {

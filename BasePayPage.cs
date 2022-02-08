@@ -7,12 +7,11 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace PayControl {
-    public class BasePayPage : Page{
-        readonly int[] MONEYTYPE = new int[] { 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 };
+    public class BasePayPage : Page {
         public List<Label> pLabels = null;
         public List<Label> rLabels = null;
         public static InputMoneyWindow inputMoneyWindow = new InputMoneyWindow();
-        
+
         public BasePayPage() {
 
         }
@@ -20,9 +19,9 @@ namespace PayControl {
         protected void BackButton_Click(object sender, RoutedEventArgs e) {
             NavigationService.GoBack();
         }
-        
-        
-        protected void SetLb(List<Label> labels,int[] pastNums) {
+
+
+        protected void SetLb(List<Label> labels, int[] pastNums) {
             if (pastNums.Length != labels.Count) {
                 return;
             }
@@ -39,11 +38,6 @@ namespace PayControl {
         protected void NextAccounting_Click(object sender, RoutedEventArgs e, Button button) {
             ButtonVisibleOff(button);
         }
-
-        protected void BtInput_Click(object sender, RoutedEventArgs e,List<Label> labels) {
-            inputMoneyWindow.Show();
-
-        }
         protected int CheackRB(UIElementCollection children) {
             int count = 0;
             foreach (RadioButton rb in children) {
@@ -55,13 +49,24 @@ namespace PayControl {
             return children.Count;
         }
 
-        internal void PayCalc_Click(object sender, RoutedEventArgs e, List<Label> pLabels, int[] pMResult) {
+        protected void PayCalc_Click(object sender, RoutedEventArgs e, List<Label> pLabels, int[] pMResult) {
 
             SetLb(pLabels, pMResult);
         }
 
-        internal void SelfInputShow(object sender, RoutedEventArgs e) {
-            
+        protected void PayInputShow(object sender, RoutedEventArgs e, List<Label> pLabels, string text) {
+            if (text == "") {
+                MessageBox.Show("値が値が入力されていません");
+                return;
+            }
+            inputMoneyWindow.ShowWindow(Calculator.PAYMONEYLIMITS);
+        }
+        protected void PayInputShow(object sender, RoutedEventArgs e, List<Label> pLabels, string text,int[] Limits) {
+            if (text == "") {
+                MessageBox.Show("値が値が入力されていません");
+                return;
+            }
+            inputMoneyWindow.ShowWindow(Limits);
         }
     }
 }

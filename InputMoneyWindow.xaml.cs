@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -17,23 +18,26 @@ namespace PayControl {
     /// InputMoneyWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class InputMoneyWindow : Window {
-        int[] hMoney = new int[9];
+        int[] rMoney = new int[Calculator.MONEYTYPE.Length];
+        List<TextBox> textBoxes;
+        List<ScrollBar> scrollBars;
         public InputMoneyWindow() {
             InitializeComponent();
+            textBoxes = new List<TextBox> { tb10000, tb5000, tb1000, tb500, tb100, tb50, tb10, tb5, tb1 };
+            scrollBars = new List<ScrollBar> { sb10000, sb5000, sb1000, sb500, sb100, sb50, sb10, sb5, sb1 };
         }
-        public int[] ShowWindow() {
-            this.ShowDialog();
-            int[] money = {int.Parse(tb10000.Text), int.Parse(tb5000.Text), int.Parse(tb1000.Text),
-                           int.Parse(tb500.Text),int.Parse(tb100.Text),int.Parse(tb50.Text),int.Parse(tb10.Text),int.Parse(tb5.Text),int.Parse(tb1.Text)};
-            return money;
+        public int[] ShowWindow(int[] Limits) {
+            for (int i = 0; i < textBoxes.Count; i++) {
+                scrollBars[i].Maximum = Limits[i];
+            }
+            
+            this.Show();
+            for (int i = 0; i < textBoxes.Count; i++) {
+                rMoney[i] = int.Parse(textBoxes[i].Text);
+            }
+            return rMoney;
         }
-        public int[] NHMShowWindow() {
-            this.ShowDialog();
-            int[] money = {int.Parse(tb10000.Text), int.Parse(tb5000.Text), int.Parse(tb1000.Text),
-                           int.Parse(tb500.Text),int.Parse(tb100.Text),int.Parse(tb50.Text),int.Parse(tb10.Text),int.Parse(tb5.Text),int.Parse(tb1.Text)};
-            lbHaveMoney1.Visibility = Visibility.Hidden;
-            return money;
-        }
+        
 
         private void btClose_Click(object sender, RoutedEventArgs e) {
             Visibility = Visibility.Hidden;

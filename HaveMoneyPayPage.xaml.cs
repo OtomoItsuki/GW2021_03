@@ -19,8 +19,8 @@ namespace PayControl {
     /// HaveMoneyPayPage.xaml の相互作用ロジック
     /// </summary>
     public partial class HaveMoneyPayPage : BasePayPage {
-        public List<Label> hLabels = null;
-        public int[] money = {1,0,0,0,0,0,0,0,0 };
+        private List<Label> hLabels = null;
+        private int[] money = {1,0,0,0,0,0,0,0,0 };
 
 
 
@@ -71,13 +71,16 @@ namespace PayControl {
         private void nextAccounting_Click(object sender, RoutedEventArgs e) {
             base.NextAccounting_Click(sender, e,nextAccounting);
         }
-        
+        //所持金を入力する
         private void BtHMInput_Click(object sender, RoutedEventArgs e) {
-            base.BtInput_Click(sender, e,hLabels);
-        }
 
-        private void BtSelfInput_Click(object sender, RoutedEventArgs e) {
-            base.SelfInputShow(sender, e);
+            //int[] values = base.;
+            //SetLb(hLabels, values);
+            //lbhaveMoney.Content = Calculator.ArrayToNum(values);
+        }
+        //自分で支払い枚数を入力する
+        private void BtPayInput_Click(object sender, RoutedEventArgs e) {
+            base.PayInputShow(sender, e,pLabels,tbPayMoney.Text);
         }
     }
 }

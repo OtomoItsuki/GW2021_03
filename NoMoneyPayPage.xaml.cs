@@ -38,6 +38,9 @@ namespace PayControl {
            
             base.ButtonVisibleOn(nextAccounting);
         }
+        private void BtPayInput_Click(object sender, RoutedEventArgs e) {
+            base.PayInputShow(sender, e, pLabels, tbPayMoney.Text);
+        }
         private void TbPayMoneyChenged(object sender, TextChangedEventArgs e) {
             TextBox box = (TextBox)sender;
             int d;
@@ -57,8 +60,6 @@ namespace PayControl {
             base.NextAccounting_Click(sender, e, nextAccounting);
         }
 
-        private void btSelfInput_Click(object sender, RoutedEventArgs e) {
-            base.SelfInputShow(sender, e);
-        }
+        
     }
 }

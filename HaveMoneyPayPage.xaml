@@ -38,7 +38,7 @@
         <Label Content="現金の種類と枚数" Grid.Row="3" Grid.ColumnSpan="5" FontSize="30" FontFamily="Meiryo" BorderThickness="0,0,0,3" BorderBrush="Green" IsHitTestVisible="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" />
         <Button x:Name="btHMInput" Content="所持金を入力" Grid.Column="1" Grid.ColumnSpan="2" Margin="10" FontSize="30" FontFamily="UD Digi Kyokasho N-R" Visibility="Visible" HorizontalAlignment="Center" Click="BtHMInput_Click"/>
         <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="btSelfInput" Content="支払い枚数を入力" FontSize="24" Margin="10" FontFamily="UD Digi Kyokasho N-R" Click="BtSelfInput_Click"/>
+            <Button x:Name="btSelfInput" Content="支払い枚数を入力" FontSize="24" Margin="10" FontFamily="UD Digi Kyokasho N-R" Click="BtPayInput_Click"/>
             <Button x:Name="payCalc" Content="支払い額計算" FontSize="30" Margin="10" FontFamily="UD Digi Kyokasho N-R" Click="payCalc_Click"/>
 
         </StackPanel>
