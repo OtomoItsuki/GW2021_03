@@ -9,8 +9,8 @@ using System.Windows.Controls;
 namespace PayControl {
     public class BasePayPage : Page {
         public List<Label> pLabels = null;
-        public List<Label> rLabels = null;
         public static InputMoneyWindow inputMoneyWindow = new InputMoneyWindow();
+
 
         public BasePayPage() {
 
@@ -53,20 +53,15 @@ namespace PayControl {
 
             SetLb(pLabels, pMResult);
         }
+        //支払いの枚数入力
+        protected int[] PayInputShow(object sender, RoutedEventArgs e, List<Label> pLabels, int[] Limits) {
+            
+            int[] rNums = inputMoneyWindow.ShowWindow(Limits);
+            SetLb(pLabels, rNums);
+            return rNums;
 
-        protected void PayInputShow(object sender, RoutedEventArgs e, List<Label> pLabels, string text) {
-            if (text == "") {
-                MessageBox.Show("値が値が入力されていません");
-                return;
-            }
-            inputMoneyWindow.ShowWindow(Calculator.PAYMONEYLIMITS);
         }
-        protected void PayInputShow(object sender, RoutedEventArgs e, List<Label> pLabels, string text,int[] Limits) {
-            if (text == "") {
-                MessageBox.Show("値が値が入力されていません");
-                return;
-            }
-            inputMoneyWindow.ShowWindow(Limits);
-        }
+        
+
     }
-}
+    }

@@ -26,7 +26,7 @@
 
         <Button x:Name="backButton" Margin="10" Content="戻る" FontSize="24" BorderThickness="2" FontFamily="UD Digi Kyokasho N-R" Click="backButton_Click"/>
         <Label Content="支払い額" Grid.Row="1" Grid.Column="2" FontSize="38" HorizontalAlignment="Right" FontFamily="UD Digi Kyokasho N-R" VerticalAlignment="Center"/>
-        <TextBox x:Name="tbPayMoney" Grid.Row="1" Grid.Column="3" FontSize="38" TextAlignment="Right" Margin="0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" MaxLength="10" InputMethod.IsInputMethodEnabled="False" TextChanged="tbPayMoney_TextChanged"/>
+        <TextBox x:Name="tbPayMoney" Grid.Row="1" Grid.Column="3" FontSize="38" TextAlignment="Right" Margin="0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" MaxLength="10" InputMethod.IsInputMethodEnabled="False" TextChanged="TbPayMoneyChenged"/>
         <Label Content="円"  Grid.Row="1" Grid.Column="4" FontSize="40" FontFamily="UD Digi Kyokasho N-R" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <StackPanel x:Name ="spRadiobutton" Grid.Row="2" Grid.Column="1" Orientation="Vertical">
             <RadioButton Content="お釣りの種類が少なくなる" FontSize="20" Foreground="#FF096300" VerticalContentAlignment="Center" IsChecked="True"/>

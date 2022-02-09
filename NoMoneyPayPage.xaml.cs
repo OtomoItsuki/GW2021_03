@@ -25,7 +25,6 @@ namespace PayControl {
             InitializeComponent();
             nextAccounting.Visibility = Visibility.Hidden;
             pLabels = new List<Label>() { lbP10000, lbP5000, lbP1000, lbP500, lbP100, lbP50, lbP10, lbP5, lbP1 };
-            rLabels = new List<Label>() { rPayMoney, rChange };
         }
 
         private void payCalc_Click(object sender, RoutedEventArgs e) {
@@ -39,7 +38,13 @@ namespace PayControl {
             base.ButtonVisibleOn(nextAccounting);
         }
         private void BtPayInput_Click(object sender, RoutedEventArgs e) {
-            base.PayInputShow(sender, e, pLabels, tbPayMoney.Text);
+            if (tbPayMoney.Text == "") {
+                MessageBox.Show("支払額が正しくありません");
+                return;
+            }
+            int rNum = Calculator.ArrayToNum(base.PayInputShow(sender, e, pLabels, Calculator.limits));
+            rPayMoney.Content = rNum;
+            rChange.Content = rNum- int.Parse(tbPayMoney.Text);
         }
         private void TbPayMoneyChenged(object sender, TextChangedEventArgs e) {
             TextBox box = (TextBox)sender;
@@ -47,9 +52,6 @@ namespace PayControl {
             if (!int.TryParse(box.Text, out d)) {
                 box.Text = Regex.Replace(box.Text, "[^0-9-]", "");
             }
-        }
-        private void tbPayMoney_TextChanged(object sender, TextChangedEventArgs e) {
-
         }
         private void backButton_Click(object sender, RoutedEventArgs e) {
             base.BackButton_Click(sender, e);

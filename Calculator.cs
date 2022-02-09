@@ -22,26 +22,27 @@ namespace PayControl {
         /// 使用するお金の限度数を種類ごとにした配列
         /// </summary>
         public readonly static int[] MoneyLimits = setLimits();
-        public readonly static int[] PAYMONEYLIMITS = new int[] {127,127,127,20,20,20,20,20,20, };
+        public readonly static int[] PAYMONEYLIMITS = new int[] {127,127,127,COINILIMIT,COINILIMIT,COINILIMIT,COINILIMIT,COINILIMIT,COINILIMIT, };
+        public readonly static int[] limits = Enumerable.Repeat<int>(127, Calculator.MONEYTYPE.Length).ToArray();
 
         private static int[] setLimits() {
             int[] Limits = new int[MONEYTYPE.Length];
             for (int i = 0; i < MONEYTYPE.Length; i++) {
                 //10000はほぼ制限なし(127まで)
                 if (i == 0) {
-                    MoneyLimits[i] = 127;
+                    Limits[i] = 127;
                 }
                 //1000,100,10,1は2枚
                 else if (i % 2 != 0) {
-                    MoneyLimits[i] = 2;
+                    Limits[i] = 2;
                 }
                 //500,50,5は1枚
                 else if (i < COININDEX) {
-                    MoneyLimits[i] = 1;
+                    Limits[i] = 1;
                 }
                 //5000は1枚
                 else {
-                    MoneyLimits[i] = 1;
+                    Limits[i] = 1;
                 }
             }
             return Limits;

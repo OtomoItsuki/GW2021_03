@@ -20,7 +20,12 @@ namespace PayControl {
     /// </summary>
     public partial class HaveMoneyPayPage : BasePayPage {
         private List<Label> hLabels = null;
-        private int[] money = {1,0,0,0,0,0,0,0,0 };
+        protected int[] haveMoney = setMoney();
+
+        private static int[] setMoney() {
+            int[] money = new int[Calculator.MONEYTYPE.Length];
+            return money;
+        }
 
 
 
@@ -30,7 +35,6 @@ namespace PayControl {
             nextAccounting.Visibility = Visibility.Hidden;
             hLabels = new List<Label>() { lbH10000, lbH5000, lbH1000, lbH500, lbH100, lbH50, lbH10, lbH5, lbH1 };
             pLabels = new List<Label>() { lbP10000, lbP5000, lbP1000, lbP500, lbP100, lbP50, lbP10, lbP5, lbP1 };
-            rLabels = new List<Label>() { rPayMoney, rChange };
         }
 
         private void payCalc_Click(object sender, RoutedEventArgs e) {
@@ -39,7 +43,7 @@ namespace PayControl {
             }   
             int checkedNum = CheackRB(spRadiobutton.Children);
             int pMcalc = int.Parse(tbPayMoney.Text);
-            int[] hMCalc = money;
+            int[] hMCalc = haveMoney;
             //int haveMoneyCalc = ;
 
             if (pMcalc > int.Parse(lbhaveMoney.Content.ToString())) {
@@ -73,14 +77,23 @@ namespace PayControl {
         }
         //所持金を入力する
         private void BtHMInput_Click(object sender, RoutedEventArgs e) {
-
-            //int[] values = base.;
-            //SetLb(hLabels, values);
-            //lbhaveMoney.Content = Calculator.ArrayToNum(values);
+            haveMoney =inputMoneyWindow.ShowWindow(Calculator.limits,haveMoney);
+            SetLb(hLabels, haveMoney);
+            lbhaveMoney.Content = Calculator.ArrayToNum(haveMoney);
         }
         //自分で支払い枚数を入力する
         private void BtPayInput_Click(object sender, RoutedEventArgs e) {
-            base.PayInputShow(sender, e,pLabels,tbPayMoney.Text);
+            if (tbPayMoney.Text == "" || int.Parse(tbPayMoney.Text) < Calculator.ArrayToNum(haveMoney)) {
+                MessageBox.Show("支払額が正しくありません");
+                return;
+            }
+            int[] rMoney = base.PayInputShow(sender, e,pLabels,haveMoney);
+            for (int i = 0; i < haveMoney.Length; i++) {
+                haveMoney[i] -= rMoney[i];
+            }
+            rPayMoney.Content = Calculator.ArrayToNum(rMoney);
+            rChange.Content = Calculator.ArrayToNum(rMoney) - int.Parse(tbPayMoney.Text);
+            rRemainMoney.Content = Calculator.ArrayToNum(haveMoney);
         }
     }
 }

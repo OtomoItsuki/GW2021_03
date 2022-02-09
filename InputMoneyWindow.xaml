@@ -124,7 +124,7 @@
         <Button x:Name="btDecision" Content="決定" VerticalAlignment="Center" Width="100" Height="40" Grid.Row="6" Grid.Column="1" FontSize="24" Click="btDecision_Click"/>
         <StackPanel x:Name="sPHaveMoney" Grid.Row="4" >
             <Label Content="金額" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="UD Digi Kyokasho N-R" />
-            <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontFamily="UD Digi Kyokasho N-R" />
+            <Label x:Name="lbHaveMoney" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontFamily="UD Digi Kyokasho N-R" />
 
         </StackPanel>
         <Label HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" FontSize="20" FontFamily="UD Digi Kyokasho N-R" />
