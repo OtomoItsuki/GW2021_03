@@ -31,20 +31,37 @@ namespace PayControl {
             if (tbPayMoney.Text == "") {
                 return;
             }
-            int checkedNum = CheackRB(spRadiobutton.Children);
-            int[] pMResult = Calculator.PayMoneyCalc(int.Parse(tbPayMoney.Text));
-            base.PayCalc_Click(sender,e, pLabels, pMResult);
+            int[] pMResult = null;
+            switch (CheackRB(spRadiobutton.Children)) {
+                case 0:
+                    pMResult = Calculator.NumToArrayReduceRemain(int.Parse(tbPayMoney.Text));
+                    break;
+                case 1:
+                    pMResult = Calculator.PayMoneyCalc(int.Parse(tbPayMoney.Text));
+                    break;
+                default:
+                    break;
+            }
            
             base.ButtonVisibleOn(nextAccounting);
+            base.PayCalc_Click(sender, e, pLabels, pMResult);
         }
+        //手動入力
         private void BtPayInput_Click(object sender, RoutedEventArgs e) {
             if (tbPayMoney.Text == "") {
                 MessageBox.Show("支払額が正しくありません");
                 return;
             }
-            int rNum = Calculator.ArrayToNum(base.PayInputShow(sender, e, pLabels, Calculator.limits));
-            rPayMoney.Content = rNum;
-            rChange.Content = rNum- int.Parse(tbPayMoney.Text);
+            inputMoneyWindow.lbPayMoney.Content = tbPayMoney.Text;
+            int[] rMoney;
+            rMoney = base.PayInputShow(int.Parse(tbPayMoney.Text), pLabels, Calculator.PAYMONEYLIMITS);
+            if (inputMoneyWindow.Result) {
+
+                rPayMoney.Content = Calculator.ArrayToNum(rMoney);
+                rChange.Content = Calculator.ArrayToNum(rMoney) - int.Parse(tbPayMoney.Text);
+
+                base.ButtonVisibleOn(nextAccounting);
+            }
         }
         private void TbPayMoneyChenged(object sender, TextChangedEventArgs e) {
             TextBox box = (TextBox)sender;
@@ -53,13 +70,13 @@ namespace PayControl {
                 box.Text = Regex.Replace(box.Text, "[^0-9-]", "");
             }
         }
-        private void backButton_Click(object sender, RoutedEventArgs e) {
+        private new void BackButton_Click(object sender, RoutedEventArgs e) {
             base.BackButton_Click(sender, e);
 
         }
 
         private void nextAccounting_Click(object sender, RoutedEventArgs e) {
-            base.NextAccounting_Click(sender, e, nextAccounting);
+            base.NextAccounting_Click(sender, e, nextAccounting,tbPayMoney,pLabels, rPayMoney,rChange);
         }
 
         

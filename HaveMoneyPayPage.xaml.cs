@@ -20,13 +20,7 @@ namespace PayControl {
     /// </summary>
     public partial class HaveMoneyPayPage : BasePayPage {
         private List<Label> hLabels = null;
-        protected int[] haveMoney = setMoney();
-
-        private static int[] setMoney() {
-            int[] money = new int[Calculator.MONEYTYPE.Length];
-            return money;
-        }
-
+        protected int[] haveMoney = new int[Calculator.MONEYTYPE.Length];
 
 
 
@@ -35,6 +29,7 @@ namespace PayControl {
             nextAccounting.Visibility = Visibility.Hidden;
             hLabels = new List<Label>() { lbH10000, lbH5000, lbH1000, lbH500, lbH100, lbH50, lbH10, lbH5, lbH1 };
             pLabels = new List<Label>() { lbP10000, lbP5000, lbP1000, lbP500, lbP100, lbP50, lbP10, lbP5, lbP1 };
+            base.SetLb(hLabels, haveMoney);
         }
 
         private void payCalc_Click(object sender, RoutedEventArgs e) {
@@ -42,17 +37,16 @@ namespace PayControl {
                 return;
             }   
             int checkedNum = CheackRB(spRadiobutton.Children);
-            int pMcalc = int.Parse(tbPayMoney.Text);
-            int[] hMCalc = haveMoney;
+            int pMCalc = int.Parse(tbPayMoney.Text);
+            int[] hMCalc = haveMoney.ToArray();
             //int haveMoneyCalc = ;
 
-            if (pMcalc > int.Parse(lbhaveMoney.Content.ToString())) {
+            if (pMCalc > int.Parse(lbhaveMoney.Content.ToString())) {
                 MessageBox.Show("支払う額より所持金が少ないです","",MessageBoxButton.OK);
                 return;
             }
-            base.SetLb(hLabels, hMCalc);
-            int[] pMResult = Calculator.PayMoneyCalc(pMcalc, hMCalc);
-            base.PayCalc_Click(sender, e, pLabels, pMResult);
+            int[] pMResult = Calculator.NumToArrayReduceRemain(pMCalc,hMCalc);
+            SetLb(pLabels, pMResult);
             rRemainMoney.Content = Calculator.ArrayToNum(hMCalc);
             base.ButtonVisibleOn(nextAccounting);
         }
@@ -67,33 +61,49 @@ namespace PayControl {
             }
         }
 
-        private void backButton_Click(object sender, RoutedEventArgs e) {
+        private new void BackButton_Click(object sender, RoutedEventArgs e) {
             base.BackButton_Click(sender, e);
             
         }
 
         private void nextAccounting_Click(object sender, RoutedEventArgs e) {
-            base.NextAccounting_Click(sender, e,nextAccounting);
+            base.NextAccounting_Click(sender, e,nextAccounting,tbPayMoney,pLabels,rPayMoney,rChange);
+            SetLb(hLabels, new int[9]);
+            lbhaveMoney.Content = Calculator.ArrayToNum(haveMoney);
+            rRemainMoney.Content = 0.ToString();
         }
         //所持金を入力する
         private void BtHMInput_Click(object sender, RoutedEventArgs e) {
-            haveMoney =inputMoneyWindow.ShowWindow(Calculator.limits,haveMoney);
+            if (inputMoneyWindow.lbPayMoney.Visibility == Visibility.Visible) {
+                inputMoneyWindow.lbPayMoney.Visibility = Visibility.Hidden;
+            }
+            Array.Copy(inputMoneyWindow.ShowWindow(haveMoney, Calculator.INPUTLIMITS), haveMoney, Calculator.MONEYTYPE.Length);
             SetLb(hLabels, haveMoney);
             lbhaveMoney.Content = Calculator.ArrayToNum(haveMoney);
         }
         //自分で支払い枚数を入力する
         private void BtPayInput_Click(object sender, RoutedEventArgs e) {
-            if (tbPayMoney.Text == "" || int.Parse(tbPayMoney.Text) < Calculator.ArrayToNum(haveMoney)) {
-                MessageBox.Show("支払額が正しくありません");
+            if (tbPayMoney.Text == "" || int.Parse(tbPayMoney.Text) > Calculator.ArrayToNum(haveMoney)) {
+                MessageBox.Show("支払い額が正しくありません");
                 return;
             }
-            int[] rMoney = base.PayInputShow(sender, e,pLabels,haveMoney);
-            for (int i = 0; i < haveMoney.Length; i++) {
-                haveMoney[i] -= rMoney[i];
+            inputMoneyWindow.lbPayMoney.Content = tbPayMoney.Text;
+            int[] rMoney;
+            rMoney = base.PayInputShow(int.Parse(tbPayMoney.Text), pLabels, haveMoney);
+            if (inputMoneyWindow.Result) {
+
+                for (int i = 0; i < haveMoney.Length; i++) {
+                    haveMoney[i] -= rMoney[i];
+                }
+                rPayMoney.Content = Calculator.ArrayToNum(rMoney);
+                rChange.Content = Calculator.ArrayToNum(rMoney) - int.Parse(tbPayMoney.Text);
+                int[] ReduceCalc = Calculator.NumToArray(int.Parse(rChange.Content.ToString()));
+                for (int i = 0; i < haveMoney.Length; i++) {
+                    haveMoney[i] += ReduceCalc[i];
+                }
+                rRemainMoney.Content = Calculator.ArrayToNum(haveMoney);
             }
-            rPayMoney.Content = Calculator.ArrayToNum(rMoney);
-            rChange.Content = Calculator.ArrayToNum(rMoney) - int.Parse(tbPayMoney.Text);
-            rRemainMoney.Content = Calculator.ArrayToNum(haveMoney);
+            base.ButtonVisibleOn(nextAccounting);
         }
     }
 }

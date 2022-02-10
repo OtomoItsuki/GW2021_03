@@ -19,33 +19,66 @@ namespace PayControl {
     /// InputMoneyWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class InputMoneyWindow : Window {
-        int[] rMoney = new int[Calculator.MONEYTYPE.Length];
+        private int[] rHaveMoney = new int[Calculator.MONEYTYPE.Length];
+        private int[] rMoney = new int[Calculator.MONEYTYPE.Length];
+        public bool Result;
         int[] cancelNums;
-        List<TextBox> textBoxes;
-        List<ScrollBar> scrollBars;
+        private List<TextBox> textBoxes;
+        private List<ScrollBar> scrollBars;
         public InputMoneyWindow() {
             InitializeComponent();
             textBoxes = new List<TextBox> { tb10000, tb5000, tb1000, tb500, tb100, tb50, tb10, tb5, tb1 };
             scrollBars = new List<ScrollBar> { sb10000, sb5000, sb1000, sb500, sb100, sb50, sb10, sb5, sb1 };
         }
-        public int[] ShowWindow(int[] limits) {
-            cancelNums = new int[] {0,0,0,0,0,0,0,0,0,0 };
+        //所持金、もしくは既定の値を上限とする支払い
+        public int[] ShowWindow(int pMoney, int[] limits) {
+            cancelNums = limits.ToArray();
             for (int i = 0; i < textBoxes.Count; i++) {
-                scrollBars[i].Maximum = limits[i];
+                scrollBars[i].Maximum = cancelNums[i];
                 scrollBars[i].Value = 0;
+                
             }
-            this.ShowDialog();
-            
-            return rMoney;
+
+            //なぜかShowDialogのみだとエラーが発生するので「==true || Result」を書く
+            switch (ShowDialog() == true || Result) {
+                case true:
+                    if (pMoney > Calculator.ArrayToNum(rMoney)) {
+                        MessageBox.Show("支払いに必要な額が入力された値より多いです");
+                        return this.ShowWindowCancel(pMoney);
+                    }
+                    break;
+                case false:
+                    return new int[] {0,0,0,0,0,0,0,0,0, };
+                default:
+
+                    break;
+            }
+
+            return this.rMoney;
+
         }
-        
+        public int[] ShowWindowCancel(int pMoney) {
+            switch (ShowDialog() == true || Result) {
+                case true:
+                    if (pMoney > Calculator.ArrayToNum(rMoney)) {
+                        MessageBox.Show("支払いに必要な額が入力された値より多いです");
+                        return this.ShowWindowCancel(pMoney);
+                    }
+                    break;
+                case false:
+                    break;
+                default:
+                    break;
+            } return rMoney; 
+        }
 
         private void btClose_Click(object sender, RoutedEventArgs e) {
-            btDecision_Click(sender, e);
-            rMoney = cancelNums;
+            Result = false;
+            Visibility = Visibility.Hidden;
         }
 
         private void btDecision_Click(object sender, RoutedEventArgs e) {
+            Result = true;
             Visibility = Visibility.Hidden;
 
         }
@@ -56,11 +89,11 @@ namespace PayControl {
             if (!int.TryParse(textb.Text, out d)) {
                 textb.Text = Regex.Replace(textb.Text, "[^0-9-]", "");
             }
-            rMoney[textb.TabIndex] = int.Parse(textb.Text);
-            lbHaveMoney.Content = Calculator.ArrayToNum(rMoney);
+            this.rMoney[textb.TabIndex] = int.Parse(textb.Text);
+            lbAllPayMoney.Content = Calculator.ArrayToNum(rMoney);
         }
-
-        public int[] ShowWindow(int[] limits, int[] haveMoney) {
+        //所持金入力メソッド
+        public int[] ShowWindow(int[] haveMoney ,int[] limits) {
             cancelNums = haveMoney;
             for (int i = 0; i < textBoxes.Count; i++) {
 

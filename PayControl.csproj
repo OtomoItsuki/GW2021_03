@@ -57,9 +57,6 @@
     </ApplicationDefinition>
     <Compile Include="BasePayPage.cs" />
     <Compile Include="Calculator.cs" />
-    <Compile Include="GenericView.xaml.cs">
-      <DependentUpon>GenericView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="HaveMoneyPayPage.xaml.cs">
       <DependentUpon>HaveMoneyPayPage.xaml</DependentUpon>
     </Compile>
@@ -72,10 +69,6 @@
     <Compile Include="StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="GenericView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="HaveMoneyPayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
