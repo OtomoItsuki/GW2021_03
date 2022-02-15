@@ -8,6 +8,10 @@
         Title="MainWindow" Height="540" Width="960" MinWidth="960" MinHeight="540" MaxWidth="960" MaxHeight="540"
         Closing="Window_Closing">
     <Grid>
-        <Frame Name="frame" NavigationUIVisibility="Hidden" Background="AliceBlue"/>
+        <Frame Name="frame" NavigationUIVisibility="Hidden" >
+            <Frame.Background>
+                <ImageBrush TileMode="Tile" ImageSource="22854852_s.jpg" Opacity="0.3"/>
+            </Frame.Background>
+        </Frame>
     </Grid>
 </Window>

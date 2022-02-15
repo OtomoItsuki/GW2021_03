@@ -20,8 +20,16 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="支払い調整システム" Grid.Row="0" FontSize="50" HorizontalAlignment="Center" FontFamily="UD Digi Kyokasho N-R" VerticalAlignment="Top" Margin="0,20,0,0" Grid.ColumnSpan="2"/>
 
-        <Button x:Name="NMPButton" Content="支払い額計算" Grid.Row="1" Grid.Column="0" Margin="40,0" FontSize="36" FontFamily="Meiryo" Click="NMPButton_Click"/>
-        <Button x:Name="HMPButton" Content="現金から&#xa;支払い額計算" Grid.Row="1" Grid.Column="1" Margin="40,0" FontSize="36" FontFamily="Meiryo" Click="HMPButton_Click"/>
+        <Button x:Name="NMPButton" Content="支払い額計算" Grid.Row="1" Grid.Column="0" Margin="40,0" FontSize="36" FontFamily="Meiryo" Click="NMPButton_Click" BorderThickness="3">
+            <Button.Background>
+                <SolidColorBrush Color="#FFF34A4A" Opacity="0.2"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="HMPButton" Content="現金から&#xa;支払い額計算" Grid.Row="1" Grid.Column="1" Margin="40,0" FontSize="36" FontFamily="Meiryo" Click="HMPButton_Click" BorderThickness="3">
+            <Button.Background>
+                <SolidColorBrush Color="#FFF34A4A" Opacity="0.2"/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Page>

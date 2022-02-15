@@ -85,103 +85,117 @@ namespace PayControl {
         //紙幣から一種類、硬貨から一種類以下で少なくするもしくは硬貨から二種類以下
 
         //一番最初に紙幣のみで計算、次に紙幣と硬貨の組み合わせ、最後に硬貨のみ
-        public static int[] NumToArrayReduceRemain(int PayMoney,int[] Limits) {
+        public static int[] NumToArrayReduceRemain(int PayMoney, int[] Limits) {
             int[] resultPayMoney = new int[MONEYTYPE.Length];
-            int[] rNums = null;
-            int remainNum = PayMoney;
+            int[] rNums = new int[MONEYTYPE.Length];
+            int remainNum = -PayMoney;
             int rCount = MONEYTYPE.Length;
+            int rSum = MONEYTYPE.Length * Limits.Sum();
 
-            int valueRCount = 0;
+            int index2nd;
+            int valueRCount;
+            int valueRSum;
 
-            for (int i = 0; i < COININDEX; i++) {
-                //このif文の中の処理を実行したときお釣りは出ない
-                if (remainNum % MONEYTYPE[i] == 0) {
-                    resultPayMoney[i] = remainNum / MONEYTYPE[i];
-                    return resultPayMoney;
-                }
-                //限界値まで１ずつ増やして計算
-                for (int j = 0; j < Limits[i]; j++) {
+            //何の種類かのindex
+            for (int i = 0; i < MONEYTYPE.Length; i++) {//限界値まで１ずつ増やして計算
+                //何枚かのindex
+                for (int j = 1; j < Limits[i]; j++) {
+
                     resultPayMoney[i] = j;
-                    remainNum -= MONEYTYPE[i] * j;
+                    //支払額に今出す額を足す(残りの金額がRemainNumに入る)
+                    remainNum += MONEYTYPE[i] * j;
 
-                    //お釣りとして出てくる額が今計算している桁を越したらtrue
-                    if (remainNum / MONEYTYPE[i] < 1) {
-                        if (remainNum < 0) {
-                            VerifyMostNum(resultPayMoney, ref rNums, ref rCount, valueRCount);
-                        }
-                        for (int k = i + 1; k < MONEYTYPE.Length; k++) {
-
-                            if (remainNum % MONEYTYPE[k] == 0) {
-                                resultPayMoney[k] = remainNum / MONEYTYPE[k];
-                                return resultPayMoney;
-                            }
-                            for (int l = 0; l < Limits[k]; l++) {
-                                if (MONEYTYPE[k] * Limits[k] < remainNum) {
-                                    resultPayMoney[k] = l;
-                                    remainNum -= MONEYTYPE[k] *l;
-                                    VerifyMostNum(resultPayMoney, ref rNums, ref rCount, valueRCount);
+                    //お釣りは出ない場合の判定
+                    if (remainNum == 0) {
+                        resultPayMoney.CopyTo(rNums, 0);
+                        return rNums;
+                    }
+                    
+                    if (remainNum < MONEYTYPE[i]) {
+                        //1種類目でお釣りが出る場合の判定
+                        if (remainNum > 0) {
+                            valueRCount = RemainCount(remainNum);
+                            valueRSum = Calculator.NumToArray(remainNum).Sum();
+                            //出たお釣りが今までで一番少ない場合の判定
+                            if (valueRCount <= rCount) {
+                                if (valueRCount < rCount || (valueRCount == rCount && valueRSum < rSum)) {
+                                    resultPayMoney.CopyTo(rNums, 0);
+                                    rCount = valueRCount;
+                                    rSum = valueRSum;
                                 }
+                            }
+                        }
+                        if (COININDEX < i) {
+                            index2nd = i;
+                        }
+                        else {
+                            index2nd = COININDEX;
+                        }
+                        for (int k = index2nd; k < MONEYTYPE.Length; k++) {
+                            for (int l = 1; l < Limits[k]; l++) {
+                                
+                                resultPayMoney[k] = l;
+                                //支払額に今出す額を足す(残りの金額がRemainNumに入る)
+                                remainNum += MONEYTYPE[k] * l;
+
+                                //お釣りは出ない場合の判定
+                                if (remainNum == 0) {
+                                    
+                                    resultPayMoney.CopyTo(rNums, 0);
+                                    return rNums;
+
+                                }
+
+                                if (remainNum < MONEYTYPE[k]) {
+                                    //お釣りが出る場合の判定
+                                    if (remainNum > 0) {
+                                        valueRCount = RemainCount(remainNum);
+                                        valueRSum = Calculator.NumToArray(remainNum).Sum();
+                                        //出たお釣りが今までで一番少ない場合の判定
+                                        if (valueRCount <= rCount) {
+                                            if (valueRCount < rCount || (valueRCount == rCount && valueRSum < rSum)) {
+                                                resultPayMoney.CopyTo(rNums, 0);
+                                                rCount = valueRCount;
+                                                rSum = valueRSum;
+                                            }
+                                        }
+                                    }
+
+                                }
+                                if (remainNum > MONEYTYPE[k]) {
+                                    remainNum = -PayMoney + MONEYTYPE[i] * j;
+                                    resultPayMoney[k] = 0;
+                                    break;
+                                }
+                                remainNum = -PayMoney + MONEYTYPE[i] * j;
+                                resultPayMoney[k] = 0;
                             }
                         }
 
                     }
-                    else {
-                        for (int k = 0; k < MONEYTYPE.Length; k++) {
-                            if (remainNum % MONEYTYPE[k] == 0) {
-                                resultPayMoney[k] = remainNum / MONEYTYPE[k];
-                                return resultPayMoney;
-                            }
-                            for (int l = 0; l < Limits[k]; l++) {
-                                if (MONEYTYPE[k] * Limits[k] < remainNum) {
-                                    resultPayMoney[k] = l;
-                                    remainNum -= MONEYTYPE[k] * l;
-                                    VerifyMostNum(resultPayMoney, ref rNums, ref rCount, valueRCount);
-                                }
-                            }
-                        }
+                    if (remainNum > MONEYTYPE[i]) {
+                        remainNum = -PayMoney;
+                        resultPayMoney[i] = 0;
+                        break;
                     }
-                    resultPayMoney.Initialize();
+                    remainNum = -PayMoney;
+                    resultPayMoney[i] = 0;
                 }
-                valueRCount = NumToArray(-remainNum).Count(x => x > 0);
-                //現在の最高のおつり枚数が現在のおつりと比べて多いとき、支払いに用いる枚数、お釣りの枚数上書き
-                VerifyMostNum(resultPayMoney, ref rNums, ref rCount, valueRCount);
-                resultPayMoney.Initialize();
-
             }
-
-
-            //１００００円(要素[0]と組み合わせた要素[3]以降(硬貨)のなかで一番お釣りの枚数が少なくなる)
-
-            if (resultPayMoney.Count(i => i != 0) == 2) {
-                valueRCount = NumToArray(-remainNum).Count(x => x > 0);
-                //現在の最高のおつり枚数が現在のおつりと比べて多いとき、支払いに用いる枚数、お釣りの合計金額、お釣りの枚数上書き
-                if (rCount > valueRCount) {
-                    rNums = resultPayMoney;
-                    rCount = valueRCount;
-                }
-                else if (rCount == valueRCount && resultPayMoney.Sum() < rNums.Sum()) {
-                    rNums = resultPayMoney;
-                    rCount = valueRCount;
-                }
-                resultPayMoney.Initialize();
-
-            }
-            return resultPayMoney;
+            return rNums;
         }
+        /// <summary>
+        /// 数字(お釣り)を受け取って金銭の種類の数を返す
+        /// </summary>
+        /// <param name="remainNum"></param>
+        /// <returns></returns>
+        private static int RemainCount(int remainNum) {
+            return (Calculator.NumToArray(remainNum)).Count(x => x != 0);
+        }
+
         //支払い枚数を自分で入力して計算する(帰ってくるのはお釣り)
         public static int[] InputMoneyToReduce(int payMoney,int[] payMoneys) {
             return payMoneys;
-        }
-
-        private static void VerifyMostNum(int[] mNums, ref int[] rNums, ref int rCount, int valueRCount) {
-            if (rCount > valueRCount) {
-                rNums = mNums;
-                rCount = valueRCount;
-            }
-            else if (rCount == valueRCount && mNums.Sum() < rNums.Sum()) {
-                rNums = mNums;
-                rCount = valueRCount;
-            }
         }
 
         public static int ArrayToNum(int[] moneyNums) {

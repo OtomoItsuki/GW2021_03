@@ -127,5 +127,10 @@
   <ItemGroup>
     <Folder Include="画像\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="22854852_s.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

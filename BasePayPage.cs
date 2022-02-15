@@ -37,12 +37,13 @@ namespace PayControl {
             button.Visibility = Visibility.Hidden;
         }
         protected void NextAccounting_Click(object sender, RoutedEventArgs e, Button button, TextBox tbPayMoney, List<Label> pLabels, Label rPayMoney, Label rChange) {
-
+            int[] blankNums = new int[9];
             ButtonVisibleOff(button);
-            SetLb(pLabels, new int[9]);
+            SetLb(pLabels, blankNums);
             tbPayMoney.Text = 0.ToString();
             rPayMoney.Content = 0.ToString();
             rChange.Content = 0.ToString();
+            PayCalc_Click(sender, e, pLabels,blankNums);
         }
         protected int CheackRB(UIElementCollection children) {
             int count = 0;

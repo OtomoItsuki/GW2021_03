@@ -42,10 +42,17 @@ namespace PayControl {
                 default:
                     break;
             }
-           
+            ResultSet(int.Parse(tbPayMoney.Text),rPayMoney, rChange, pMResult);
             base.ButtonVisibleOn(nextAccounting);
             base.PayCalc_Click(sender, e, pLabels, pMResult);
         }
+
+        private void ResultSet(int v, Label rPayMoney, Label rChange, int[] pMResult) {
+            int result = Calculator.ArrayToNum(pMResult);
+            rPayMoney.Content = result;
+            rChange.Content = result - v;
+        }
+
         //手動入力
         private void BtPayInput_Click(object sender, RoutedEventArgs e) {
             if (tbPayMoney.Text == "") {
