@@ -59,7 +59,7 @@ namespace PayControl {
         protected void PayCalc_Click(object sender, RoutedEventArgs e, List<Label> pLabels, int[] pMResult) {
             for (int i = 0; i < pMResult.Length; i++) {
                 if (pMResult[i] != 0) {
-                    pLabels[i].Background = new SolidColorBrush(Colors.BurlyWood);
+                    pLabels[i].Background = new SolidColorBrush(Colors.CadetBlue);
                 }
                 else {
                     pLabels[i].Background = null;

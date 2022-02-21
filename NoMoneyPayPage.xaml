@@ -118,8 +118,8 @@
 
             <Label Grid.Row="0" Grid.Column="6" Content="総額" FontSize="24" HorizontalAlignment="Right"/>
             <StackPanel Grid.Row="0" Grid.Column="7" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="rPayMoney" Content="0" FontSize="24" Foreground="YellowGreen"/>
-                <Label Content="円" FontSize="24" Foreground="YellowGreen"/>
+                <Label Name="rPayMoney" Content="0" FontSize="24" Foreground="DarkOliveGreen"/>
+                <Label Content="円" FontSize="24" Foreground="DarkOliveGreen"/>
             </StackPanel>
             <Label Grid.Row="1" Grid.Column="6" Content="お釣り" FontSize="24" HorizontalAlignment="Right"/>
             <StackPanel Grid.Row="1" Grid.Column="7" HorizontalAlignment="Right" Orientation="Horizontal">

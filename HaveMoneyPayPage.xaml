@@ -77,63 +77,63 @@
 
             <Label Content="10,000円" Grid.Row="0" Grid.Column="0" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH10000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH10000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP10000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
             <Label Content="枚" Grid.Row="0" Grid.Column="2" FontSize="24" HorizontalAlignment="Center"/>
             <Label Content="5,000円" Grid.Row="1" Grid.Column="0" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH5000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH5000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP5000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
             <Label Content="枚" Grid.Row="1" Grid.Column="2" FontSize="24" HorizontalAlignment="Center"/>
             <Label Content="1,000円" Grid.Row="2" Grid.Column="0" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH1000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH1000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP1000" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
             <Label Content="枚" Grid.Row="2" Grid.Column="2" FontSize="24" HorizontalAlignment="Center"/>
             <Label Content="500円" Grid.Row="0" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Row="0"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH500" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH500" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP500" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
             <Label Content="枚" Grid.Row="0" Grid.Column="5" FontSize="24" HorizontalAlignment="Center"/>
             <Label Content="100円" Grid.Row="1" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Row="1"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH100" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH100" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP100" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
             <Label Content="枚" Grid.Row="1" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
             <Label Content="50円" Grid.Row="2" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Row="2"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH50" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH50" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP50" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
             <Label Content="枚" Grid.Row="2" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
             <Label Content="10円" Grid.Row="3" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Row="3"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH10" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH10" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP10" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
             <Label Content="枚" Grid.Row="3" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
             <Label Content="5円" Grid.Row="4" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Row="4"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH5" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH5" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP5" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
             <Label Content="枚" Grid.Row="4" Grid.Column="5" FontSize="24" HorizontalAlignment="Right"/>
             <Label Content="1円" Grid.Row="5" Grid.Column="3" FontSize="24" BorderThickness="0,0,2,0" BorderBrush="Green" HorizontalAlignment="Right" />
             <StackPanel Grid.Row="5"  Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="lbH1" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="YellowGreen"/>
+                <Label Name="lbH1" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="DarkOliveGreen"/>
                 <Label Content="-" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
                 <Label Name="lbP1" Content="0" FontSize="24" HorizontalAlignment="Center" Foreground="Red"/>
             </StackPanel>
@@ -141,8 +141,8 @@
 
             <Label Grid.Row="0" Grid.Column="6" Content="総額" FontSize="24" HorizontalAlignment="Right"/>
             <StackPanel Grid.Row="0" Grid.Column="7" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label Name="rPayMoney" Content="0" FontSize="24" Foreground="YellowGreen"/>
-                <Label Content="円" FontSize="24" Foreground="YellowGreen"/>
+                <Label Name="rPayMoney" Content="0" FontSize="24" Foreground="DarkOliveGreen"/>
+                <Label Content="円" FontSize="24" Foreground="DarkOliveGreen"/>
             </StackPanel>
             <Label Grid.Row="1" Grid.Column="6" Content="お釣り" FontSize="24" HorizontalAlignment="Right"/>
             <StackPanel Grid.Row="1" Grid.Column="7" HorizontalAlignment="Right" Orientation="Horizontal">
