@@ -99,14 +99,14 @@ namespace PayControl {
             //何の種類かのindex
             for (int i = 0; i < MONEYTYPE.Length; i++) {//限界値まで１ずつ増やして計算
                 //何枚かのindex
-                for (int j = 1; j < Limits[i]; j++) {
+                for (int j = 1; j <= Limits[i]; j++) {
 
                     resultPayMoney[i] = j;
                     //支払額に今出す額を足す(残りの金額がRemainNumに入る)
                     remainNum += MONEYTYPE[i] * j;
 
                     //お釣りは出ない場合の判定
-                    if (remainNum == 0) {
+                    if (remainNum == 0 && i != MONEYTYPE.Length) {
                         resultPayMoney.CopyTo(rNums, 0);
                         return rNums;
                     }
@@ -132,14 +132,14 @@ namespace PayControl {
                             index2nd = COININDEX;
                         }
                         for (int k = index2nd; k < MONEYTYPE.Length; k++) {
-                            for (int l = 1; l < Limits[k]; l++) {
+                            for (int l = 1; l <= Limits[k]; l++) {
                                 
                                 resultPayMoney[k] = l;
                                 //支払額に今出す額を足す(残りの金額がRemainNumに入る)
                                 remainNum += MONEYTYPE[k] * l;
 
                                 //お釣りは出ない場合の判定
-                                if (remainNum == 0) {
+                                if (remainNum == 0 && k != MONEYTYPE.Length) {
                                     
                                     resultPayMoney.CopyTo(rNums, 0);
                                     return rNums;
@@ -180,6 +180,87 @@ namespace PayControl {
                     }
                     remainNum = -PayMoney;
                     resultPayMoney[i] = 0;
+                }
+            }
+            if (rNums.Sum() == 0) {
+                for (int i = 0; i < MONEYTYPE.Length; i++) {//限界値まで１ずつ増やして計算
+                                                            //何枚かのindex
+                    for (int j = 1; j <= Limits[i]; j++) {
+
+                        resultPayMoney[i] = j;
+                        //支払額に今出す額を足す(残りの金額がRemainNumに入る)
+                        remainNum += MONEYTYPE[i] * j;
+
+                        //お釣りは出ない場合の判定
+                        if (remainNum == 0 && i != MONEYTYPE.Length) {
+                            resultPayMoney.CopyTo(rNums, 0);
+                            return rNums;
+                        }
+
+                        if (remainNum < MONEYTYPE[i]) {
+                            //1種類目でお釣りが出る場合の判定
+                            if (remainNum > 0) {
+                                valueRCount = RemainCount(remainNum);
+                                valueRSum = Calculator.NumToArray(remainNum).Sum();
+                                //出たお釣りが今までで一番少ない場合の判定
+                                if (valueRCount <= rCount) {
+                                    if (valueRCount < rCount || (valueRCount == rCount && valueRSum < rSum)) {
+                                        resultPayMoney.CopyTo(rNums, 0);
+                                        rCount = valueRCount;
+                                        rSum = valueRSum;
+                                    }
+                                }
+                            }
+                            for (int k = i + 1; k < MONEYTYPE.Length; k++) {
+                                for (int l = 1; l <= Limits[k]; l++) {
+
+                                    resultPayMoney[k] = l;
+                                    //支払額に今出す額を足す(残りの金額がRemainNumに入る)
+                                    remainNum += MONEYTYPE[k] * l;
+
+                                    //お釣りは出ない場合の判定
+                                    if (remainNum == 0 && k != MONEYTYPE.Length) {
+
+                                        resultPayMoney.CopyTo(rNums, 0);
+                                        return rNums;
+
+                                    }
+
+                                    if (remainNum < MONEYTYPE[k]) {
+                                        //お釣りが出る場合の判定
+                                        if (remainNum > 0) {
+                                            valueRCount = RemainCount(remainNum);
+                                            valueRSum = Calculator.NumToArray(remainNum).Sum();
+                                            //出たお釣りが今までで一番少ない場合の判定
+                                            if (valueRCount <= rCount) {
+                                                if (valueRCount < rCount || (valueRCount == rCount && valueRSum < rSum)) {
+                                                    resultPayMoney.CopyTo(rNums, 0);
+                                                    rCount = valueRCount;
+                                                    rSum = valueRSum;
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                    if (remainNum > MONEYTYPE[k]) {
+                                        remainNum = -PayMoney + MONEYTYPE[i] * j;
+                                        resultPayMoney[k] = 0;
+                                        break;
+                                    }
+                                    remainNum = -PayMoney + MONEYTYPE[i] * j;
+                                    resultPayMoney[k] = 0;
+                                }
+                            }
+
+                        }
+                        if (remainNum > MONEYTYPE[i]) {
+                            remainNum = -PayMoney;
+                            resultPayMoney[i] = 0;
+                            break;
+                        }
+                        remainNum = -PayMoney;
+                        resultPayMoney[i] = 0;
+                    }
                 }
             }
             return rNums;

@@ -20,7 +20,7 @@ namespace PayControl {
     /// </summary>
     public partial class HaveMoneyPayPage : BasePayPage {
         private List<Label> hLabels = null;
-        protected int[] haveMoney = new int[Calculator.MONEYTYPE.Length];
+        private int[] haveMoney = new int[Calculator.MONEYTYPE.Length];
 
 
 
@@ -33,26 +33,39 @@ namespace PayControl {
         }
 
         private void payCalc_Click(object sender, RoutedEventArgs e) {
-            if (tbPayMoney.Text =="") {
-                return;
-            }   
-            int checkedNum = CheackRB(spRadiobutton.Children);
-            int pMCalc = int.Parse(tbPayMoney.Text);
-            int[] hMCalc = haveMoney.ToArray();
-            //int haveMoneyCalc = ;
-
-            if (pMCalc > int.Parse(lbhaveMoney.Content.ToString())) {
-                MessageBox.Show("支払う額より所持金が少ないです","",MessageBoxButton.OK);
+            if (tbPayMoney.Text == "") {
                 return;
             }
-            int[] pMResult = Calculator.NumToArrayReduceRemain(pMCalc,hMCalc);
-            SetLb(pLabels, pMResult);
-            rRemainMoney.Content = Calculator.ArrayToNum(hMCalc);
+            int[] pMResult = null;
+            switch (CheackRB(spRadiobutton.Children)) {
+                case 0:
+                    pMResult = Calculator.NumToArrayReduceRemain(int.Parse(tbPayMoney.Text),haveMoney);
+                    break;
+                case 1:
+                    pMResult = Calculator.PayMoneyCalc(int.Parse(tbPayMoney.Text));
+                    break;
+                default:
+                    break;
+            }
+            int payResult = Calculator.ArrayToNum(pMResult);
+            int[] rPayChange = Calculator.NumToArray(payResult - int.Parse(tbPayMoney.Text));
+            for (int i = 0; i < Calculator.MONEYTYPE.Length; i++) {
+                haveMoney[i] -= pMResult[i];
+                haveMoney[i] += rPayChange[i];
+            }
+            ResultSet(int.Parse(tbPayMoney.Text), rPayMoney, rChange,rRemainMoney, payResult);
             base.ButtonVisibleOn(nextAccounting);
+            base.PayCalc_Click(sender, e, pLabels, pMResult);
+        }
+        private void ResultSet(int payMoney, Label rPayMoney, Label rChange, Label rRemainMoney, int result) {
+            rPayMoney.Content = result;
+            int resultChange = result - payMoney;
+            rChange.Content = resultChange;
+            
+            rRemainMoney.Content = Calculator.ArrayToNum(haveMoney);
         }
 
 
-        
         private void TbPayMoneyChenged(object sender, TextChangedEventArgs e) {
             TextBox box = (TextBox)sender;
             int d;
@@ -68,7 +81,7 @@ namespace PayControl {
 
         private void nextAccounting_Click(object sender, RoutedEventArgs e) {
             base.NextAccounting_Click(sender, e,nextAccounting,tbPayMoney,pLabels,rPayMoney,rChange);
-            SetLb(hLabels, new int[9]);
+            SetLb(hLabels, haveMoney);
             lbhaveMoney.Content = Calculator.ArrayToNum(haveMoney);
             rRemainMoney.Content = 0.ToString();
         }
